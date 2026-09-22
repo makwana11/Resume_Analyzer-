@@ -1,0 +1,26 @@
+{% extends 'checker/base.html' %}
+{% block content %}
+<h4 class="mb-3">Pehlana Checks</h4>
+<table class="table table-bordered bg-white">
+    <thead class="table-dark">
+        <tr>
+            <th>Naam</th>
+            <th>Score</th>
+            <th>Date</th>
+            <th>Detail</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in resumes %}
+        <tr>
+            <td>{{ r.name }}</td>
+            <td>{{ r.match_score }}%</td>
+            <td>{{ r.uploaded_at|date:"d M Y, H:i" }}</td>
+            <td><a href="{% url 'result' r.pk %}" class="btn btn-sm btn-primary">Joyo</a></td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4" class="text-center text-muted">Hji sudhi koi resume check nathi thayu.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

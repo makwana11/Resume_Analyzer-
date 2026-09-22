@@ -1,0 +1,50 @@
+{% extends 'checker/base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm mb-4">
+            <div class="card-body p-4 text-center">
+                <h4>{{ resume.name }} nu ATS Match Result</h4>
+
+                {% if resume.match_score >= 70 %}
+                    <h1 class="display-4 text-success my-3">{{ resume.match_score }}%</h1>
+                    <p class="text-success fw-bold">Saru Match! 🎉</p>
+                {% elif resume.match_score >= 40 %}
+                    <h1 class="display-4 text-warning my-3">{{ resume.match_score }}%</h1>
+                    <p class="text-warning fw-bold">Average Match - Improve kari shakay.</p>
+                {% else %}
+                    <h1 class="display-4 text-danger my-3">{{ resume.match_score }}%</h1>
+                    <p class="text-danger fw-bold">Low Match - Resume ma sudharo karvani jarur che.</p>
+                {% endif %}
+
+                <div class="progress mb-4" style="height: 20px;">
+                    <div class="progress-bar bg-primary" style="width: {{ resume.match_score }}%;">
+                        {{ resume.match_score }}%
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="text-success">✅ Matched Keywords</h6>
+                        <p class="small">{{ resume.matched_keywords|default:"Koi keyword match nathi thayu." }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="text-danger">❌ Missing Keywords</h6>
+                        <p class="small">{{ resume.missing_keywords|default:"Koi keyword missing nathi!" }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="{% url 'upload_resume' %}" class="btn btn-outline-primary">Bijo Resume Check Karo</a>
+    </div>
+</div>
+{% endblock %}

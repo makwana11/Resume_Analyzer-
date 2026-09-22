@@ -1,0 +1,29 @@
+{% extends 'checker/base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h4 class="mb-3">Resume Upload Karo</h4>
+                <p class="text-muted">Tamaru resume (PDF) ane job description upload karo, ATS match score jaano.</p>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Naam</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Resume (PDF file)</label>
+                        {{ form.resume_file }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Job Description</label>
+                        {{ form.job_description }}
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Check ATS Score</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
